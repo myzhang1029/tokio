@@ -330,6 +330,8 @@ cfg_rt! {
     }
 }
 
-cfg_not_rt! {
-    pub(crate) mod coop;
+cfg_std ! {
+    cfg_not_rt! {
+        pub(crate) mod coop;
+    }
 }
