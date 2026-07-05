@@ -203,25 +203,27 @@ cfg_io_blocking! {
     pub(crate) mod blocking;
 }
 
-mod async_buf_read;
-pub use self::async_buf_read::AsyncBufRead;
+cfg_std! {
+    mod async_buf_read;
+    pub use self::async_buf_read::AsyncBufRead;
 
-mod async_read;
-pub use self::async_read::AsyncRead;
+    mod async_read;
+    pub use self::async_read::AsyncRead;
 
-mod async_seek;
-pub use self::async_seek::AsyncSeek;
+    mod async_seek;
+    pub use self::async_seek::AsyncSeek;
 
-mod async_write;
-pub use self::async_write::AsyncWrite;
+    mod async_write;
+    pub use self::async_write::AsyncWrite;
 
-mod read_buf;
-pub use self::read_buf::ReadBuf;
+    mod read_buf;
+    pub use self::read_buf::ReadBuf;
 
-// Re-export some types from `std::io` so that users don't have to deal
-// with conflicts when `use`ing `tokio::io` and `std::io`.
-#[doc(no_inline)]
-pub use std::io::{Error, ErrorKind, Result, SeekFrom};
+    // Re-export some types from `std::io` so that users don't have to deal
+    // with conflicts when `use`ing `tokio::io` and `std::io`.
+    #[doc(no_inline)]
+    pub use std::io::{Error, ErrorKind, Result, SeekFrom};
+}
 
 cfg_io_driver_impl! {
     pub(crate) mod interest;
