@@ -4,10 +4,13 @@ mod atomic_u16;
 mod atomic_u32;
 mod atomic_u64;
 mod atomic_usize;
+#[cfg(feature = "std")]
 mod barrier;
+#[cfg(feature = "std")]
 mod mutex;
 #[cfg(all(feature = "parking_lot", not(miri)))]
 mod parking_lot;
+#[cfg(feature = "std")]
 mod rwlock;
 mod unsafe_cell;
 
@@ -26,9 +29,10 @@ pub(crate) mod future {
 }
 
 pub(crate) mod hint {
-    pub(crate) use std::hint::spin_loop;
+    pub(crate) use core::hint::spin_loop;
 }
 
+#[cfg(feature = "std")]
 pub(crate) mod rand {
     use std::collections::hash_map::RandomState;
     use std::hash::{BuildHasher, Hash, Hasher};
@@ -44,6 +48,7 @@ pub(crate) mod rand {
     }
 }
 
+#[cfg(feature = "std")]
 pub(crate) mod sync {
     pub(crate) use std::sync::{Arc, Weak};
 
@@ -80,6 +85,7 @@ pub(crate) mod sync {
     pub(crate) use super::barrier::Barrier;
 }
 
+#[cfg(feature = "std")]
 pub(crate) mod sys {
     #[cfg(feature = "rt-multi-thread")]
     pub(crate) fn num_cpus() -> usize {
@@ -110,6 +116,7 @@ pub(crate) mod sys {
     }
 }
 
+#[cfg(feature = "std")]
 pub(crate) mod thread {
     #[inline]
     pub(crate) fn yield_now() {
