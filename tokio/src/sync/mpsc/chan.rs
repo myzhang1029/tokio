@@ -8,12 +8,13 @@ use crate::sync::mpsc::{bounded, list, unbounded};
 use crate::sync::notify::Notify;
 use crate::util::cacheline::CachePadded;
 
-use std::fmt;
-use std::panic;
+use alloc::vec::Vec;
+use core::fmt;
+use core::panic;
 use std::process;
-use std::sync::atomic::Ordering::{AcqRel, Acquire, Relaxed, Release};
-use std::task::Poll::{Pending, Ready};
-use std::task::{ready, Context, Poll};
+use core::sync::atomic::Ordering::{AcqRel, Acquire, Relaxed, Release};
+use core::task::Poll::{Pending, Ready};
+use core::task::{ready, Context, Poll};
 
 /// Channel sender.
 pub(crate) struct Tx<T, S> {

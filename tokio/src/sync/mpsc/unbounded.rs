@@ -2,8 +2,9 @@ use crate::loom::sync::{atomic::AtomicUsize, Arc};
 use crate::sync::mpsc::chan;
 use crate::sync::mpsc::error::{SendError, TryRecvError};
 
-use std::fmt;
-use std::task::{Context, Poll};
+use alloc::vec::Vec;
+use core::fmt;
+use core::task::{Context, Poll};
 
 /// Send values to the associated `UnboundedReceiver`.
 ///
@@ -165,7 +166,7 @@ impl<T> UnboundedReceiver<T> {
     /// # }
     /// ```
     pub async fn recv(&mut self) -> Option<T> {
-        use std::future::poll_fn;
+        use core::future::poll_fn;
 
         poll_fn(|cx| self.poll_recv(cx)).await
     }
@@ -239,7 +240,7 @@ impl<T> UnboundedReceiver<T> {
     /// # }
     /// ```
     pub async fn recv_many(&mut self, buffer: &mut Vec<T>, limit: usize) -> usize {
-        use std::future::poll_fn;
+        use core::future::poll_fn;
         poll_fn(|cx| self.chan.recv_many(cx, buffer, limit)).await
     }
 
@@ -555,7 +556,7 @@ impl<T> UnboundedSender<T> {
 
     fn inc_num_messages(&self) -> bool {
         use std::process;
-        use std::sync::atomic::Ordering::{AcqRel, Acquire};
+        use core::sync::atomic::Ordering::{AcqRel, Acquire};
 
         let mut curr = self.chan.semaphore().0.load(Acquire);
 

@@ -4,12 +4,12 @@ use crate::sync::batch_semaphore as semaphore;
 #[cfg(all(tokio_unstable, feature = "tracing"))]
 use crate::util::trace;
 
-use std::cell::UnsafeCell;
-use std::error::Error;
-use std::marker::PhantomData;
-use std::ops::{Deref, DerefMut};
-use std::sync::Arc;
-use std::{fmt, mem, ptr};
+use core::cell::UnsafeCell;
+use core::error::Error;
+use core::marker::PhantomData;
+use core::ops::{Deref, DerefMut};
+use alloc::sync::Arc;
+use core::{fmt, mem, ptr};
 
 /// An asynchronous `Mutex`-like type.
 ///
@@ -126,9 +126,9 @@ use std::{fmt, mem, ptr};
 ///
 /// [`Mutex`]: struct@Mutex
 /// [`MutexGuard`]: struct@MutexGuard
-/// [`Arc`]: struct@std::sync::Arc
+/// [`Arc`]: struct@alloc::sync::Arc
 /// [`std::sync::Mutex`]: struct@std::sync::Mutex
-/// [`Send`]: trait@std::marker::Send
+/// [`Send`]: trait@core::marker::Send
 /// [`lock`]: method@Mutex::lock
 pub struct Mutex<T: ?Sized> {
     #[cfg(all(tokio_unstable, feature = "tracing"))]
@@ -170,7 +170,7 @@ pub struct MutexGuard<'a, T: ?Sized> {
 /// The lock is automatically released whenever the guard is dropped, at which
 /// point `lock` will succeed yet again.
 ///
-/// [`Arc`]: std::sync::Arc
+/// [`Arc`]: alloc::sync::Arc
 #[clippy::has_significant_drop]
 pub struct OwnedMutexGuard<T: ?Sized> {
     // When changing the fields in this struct, make sure to update the
@@ -341,7 +341,7 @@ impl<T: ?Sized> Mutex<T> {
     {
         #[cfg(all(tokio_unstable, feature = "tracing"))]
         let resource_span = {
-            let location = std::panic::Location::caller();
+            let location = core::panic::Location::caller();
 
             tracing::trace_span!(
                 parent: None,
@@ -614,7 +614,7 @@ impl<T: ?Sized> Mutex<T> {
     /// # }
     /// ```
     ///
-    /// [`Arc`]: std::sync::Arc
+    /// [`Arc`]: alloc::sync::Arc
     pub async fn lock_owned(self: Arc<Self>) -> OwnedMutexGuard<T> {
         #[cfg(all(tokio_unstable, feature = "tracing"))]
         let resource_span = self.resource_span.clone();
@@ -733,7 +733,7 @@ impl<T: ?Sized> Mutex<T> {
     /// keeps the `Mutex` alive by holding an `Arc`.
     ///
     /// [`TryLockError`]: TryLockError
-    /// [`Arc`]: std::sync::Arc
+    /// [`Arc`]: alloc::sync::Arc
     /// # Examples
     ///
     /// ```
@@ -807,11 +807,11 @@ where
     }
 }
 
-impl<T: ?Sized> std::fmt::Debug for Mutex<T>
+impl<T: ?Sized> core::fmt::Debug for Mutex<T>
 where
-    T: std::fmt::Debug,
+    T: core::fmt::Debug,
 {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         let mut d = f.debug_struct("Mutex");
         match self.try_lock() {
             Ok(inner) => d.field("data", &&*inner),
@@ -830,7 +830,7 @@ impl<'a, T: ?Sized> MutexGuard<'a, T> {
         // original. In the end, we have not duplicated or forgotten any values.
         MutexGuardInner {
             #[cfg(all(tokio_unstable, feature = "tracing"))]
-            resource_span: unsafe { std::ptr::read(&me.resource_span) },
+            resource_span: unsafe { core::ptr::read(&me.resource_span) },
             lock: me.lock,
         }
     }
@@ -1191,7 +1191,7 @@ impl<'a, T: ?Sized> MappedMutexGuard<'a, T> {
             s: me.s,
             data: me.data,
             #[cfg(all(tokio_unstable, feature = "tracing"))]
-            resource_span: unsafe { std::ptr::read(&me.resource_span) },
+            resource_span: unsafe { core::ptr::read(&me.resource_span) },
         }
     }
 

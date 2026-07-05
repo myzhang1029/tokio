@@ -455,6 +455,11 @@
 //! Because of this, sockets must currently be created via the `FromRawFd`
 //! trait.
 
+#![no_std]
+extern crate alloc;
+#[cfg(feature = "std")]
+extern crate std;
+
 // Test that pointer width is compatible. This asserts that e.g. usize is at
 // least 32 bits, which a lot of components in Tokio currently assumes.
 //

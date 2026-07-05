@@ -8,8 +8,9 @@ cfg_time! {
     use crate::time::Duration;
 }
 
-use std::fmt;
-use std::task::{Context, Poll};
+use alloc::vec::Vec;
+use core::fmt;
+use core::task::{Context, Poll};
 
 /// Sends values to the associated `Receiver`.
 ///
@@ -241,7 +242,7 @@ impl<T> Receiver<T> {
     /// # }
     /// ```
     pub async fn recv(&mut self) -> Option<T> {
-        use std::future::poll_fn;
+        use core::future::poll_fn;
         poll_fn(|cx| self.chan.recv(cx)).await
     }
 
@@ -317,7 +318,7 @@ impl<T> Receiver<T> {
     /// # }
     /// ```
     pub async fn recv_many(&mut self, buffer: &mut Vec<T>, limit: usize) -> usize {
-        use std::future::poll_fn;
+        use core::future::poll_fn;
         poll_fn(|cx| self.chan.recv_many(cx, buffer, limit)).await
     }
 
@@ -1261,7 +1262,7 @@ impl<T> Sender<T> {
     /// [`Sender::reserve`]: Sender::reserve
     /// [`OwnedPermit`]: OwnedPermit
     /// [`send`]: OwnedPermit::send
-    /// [`Arc::clone`]: std::sync::Arc::clone
+    /// [`Arc::clone`]: alloc::sync::Arc::clone
     pub async fn reserve_owned(self) -> Result<OwnedPermit<T>, SendError<()>> {
         self.reserve_inner(1).await?;
         Ok(OwnedPermit {
@@ -1444,7 +1445,7 @@ impl<T> Sender<T> {
     /// [`OwnedPermit`]: OwnedPermit
     /// [`send`]: OwnedPermit::send
     /// [`reserve_owned`]: Sender::reserve_owned
-    /// [`Arc::clone`]: std::sync::Arc::clone
+    /// [`Arc::clone`]: alloc::sync::Arc::clone
     ///
     /// # Examples
     ///
@@ -1690,7 +1691,7 @@ impl<T> Permit<'_, T> {
     /// # }
     /// ```
     pub fn send(self, value: T) {
-        use std::mem;
+        use core::mem;
 
         self.chan.send(value);
 
@@ -1744,7 +1745,7 @@ impl<'a, T> Iterator for PermitIterator<'a, T> {
     }
 }
 impl<T> ExactSizeIterator for PermitIterator<'_, T> {}
-impl<T> std::iter::FusedIterator for PermitIterator<'_, T> {}
+impl<T> core::iter::FusedIterator for PermitIterator<'_, T> {}
 
 impl<T> Drop for PermitIterator<'_, T> {
     fn drop(&mut self) {

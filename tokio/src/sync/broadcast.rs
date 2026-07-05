@@ -369,7 +369,7 @@ use super::Notify;
 /// Data shared between senders and receivers.
 struct Shared<T> {
     /// slots in the channel.
-    buffer: Box<[Mutex<Slot<T>>]>,
+    buffer: alloc::boxed::Box<[Mutex<Slot<T>>]>,
 
     /// Mask a position -> index.
     mask: usize,

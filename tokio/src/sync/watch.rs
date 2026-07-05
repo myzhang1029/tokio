@@ -87,7 +87,7 @@
 //! use tokio::sync::watch;
 //! use tokio::time::{Duration, sleep};
 //!
-//! # async fn dox() -> Result<(), Box<dyn std::error::Error>> {
+//! # async fn dox() -> Result<(), Box<dyn core::error::Error>> {
 //! let (tx, mut rx) = watch::channel("hello");
 //!
 //! tokio::spawn(async move {
@@ -168,9 +168,9 @@ use crate::task::coop::cooperative;
 use crate::loom::sync::atomic::AtomicUsize;
 use crate::loom::sync::atomic::Ordering::{AcqRel, Relaxed};
 use crate::loom::sync::{Arc, RwLock, RwLockReadGuard};
-use std::fmt;
-use std::mem;
-use std::ops;
+use core::fmt;
+use core::mem;
+use core::ops;
 use std::panic;
 
 /// Receives values from the associated [`Sender`](struct@Sender).

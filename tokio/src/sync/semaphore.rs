@@ -2,7 +2,7 @@ use super::batch_semaphore as ll; // low level implementation
 use super::{AcquireError, TryAcquireError};
 #[cfg(all(tokio_unstable, feature = "tracing"))]
 use crate::util::trace;
-use std::sync::Arc;
+use alloc::sync::Arc;
 
 /// Counting semaphore performing asynchronous permit acquisition.
 ///
@@ -456,7 +456,7 @@ impl Semaphore {
     pub fn new(permits: usize) -> Self {
         #[cfg(all(tokio_unstable, feature = "tracing"))]
         let resource_span = {
-            let location = std::panic::Location::caller();
+            let location = core::panic::Location::caller();
 
             tracing::trace_span!(
                 parent: None,
@@ -761,7 +761,7 @@ impl Semaphore {
     /// # }
     /// ```
     ///
-    /// [`Arc`]: std::sync::Arc
+    /// [`Arc`]: alloc::sync::Arc
     /// [`AcquireError`]: crate::sync::AcquireError
     /// [`OwnedSemaphorePermit`]: crate::sync::OwnedSemaphorePermit
     pub async fn acquire_owned(self: Arc<Self>) -> Result<OwnedSemaphorePermit, AcquireError> {
@@ -822,7 +822,7 @@ impl Semaphore {
     /// # }
     /// ```
     ///
-    /// [`Arc`]: std::sync::Arc
+    /// [`Arc`]: alloc::sync::Arc
     /// [`AcquireError`]: crate::sync::AcquireError
     /// [`OwnedSemaphorePermit`]: crate::sync::OwnedSemaphorePermit
     pub async fn acquire_many_owned(
@@ -875,7 +875,7 @@ impl Semaphore {
     /// # }
     /// ```
     ///
-    /// [`Arc`]: std::sync::Arc
+    /// [`Arc`]: alloc::sync::Arc
     /// [`TryAcquireError::Closed`]: crate::sync::TryAcquireError::Closed
     /// [`TryAcquireError::NoPermits`]: crate::sync::TryAcquireError::NoPermits
     /// [`OwnedSemaphorePermit`]: crate::sync::OwnedSemaphorePermit
@@ -914,7 +914,7 @@ impl Semaphore {
     /// # }
     /// ```
     ///
-    /// [`Arc`]: std::sync::Arc
+    /// [`Arc`]: alloc::sync::Arc
     /// [`TryAcquireError::Closed`]: crate::sync::TryAcquireError::Closed
     /// [`TryAcquireError::NoPermits`]: crate::sync::TryAcquireError::NoPermits
     /// [`OwnedSemaphorePermit`]: crate::sync::OwnedSemaphorePermit
@@ -1031,7 +1031,7 @@ impl<'a> SemaphorePermit<'a> {
     #[track_caller]
     pub fn merge(&mut self, mut other: Self) {
         assert!(
-            std::ptr::eq(self.sem, other.sem),
+            core::ptr::eq(self.sem, other.sem),
             "merging permits from different semaphore instances"
         );
         self.permits += other.permits;
