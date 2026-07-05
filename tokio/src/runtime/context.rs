@@ -1,7 +1,7 @@
 use crate::loom::thread::AccessError;
 use crate::task::coop;
 
-use std::cell::Cell;
+use core::cell::Cell;
 
 #[cfg(any(feature = "rt", feature = "macros"))]
 use crate::util::rand::FastRand;
@@ -137,6 +137,7 @@ pub(crate) fn thread_rng_n(n: u32) -> u32 {
     })
 }
 
+#[cfg(feature = "std")]
 pub(crate) fn budget<R>(f: impl FnOnce(&Cell<coop::Budget>) -> R) -> Result<R, AccessError> {
     CONTEXT.try_with(|ctx| f(&ctx.budget))
 }

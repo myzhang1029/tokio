@@ -414,13 +414,16 @@
 #[macro_use]
 mod tests;
 
-pub(crate) mod context;
 
-pub(crate) mod park;
+cfg_std! {
+    pub(crate) mod context;
 
-pub(crate) mod driver;
+    pub(crate) mod park;
 
-pub(crate) mod scheduler;
+    pub(crate) mod driver;
+
+    pub(crate) mod scheduler;
+}
 
 cfg_io_driver_impl! {
     pub(crate) mod io;
