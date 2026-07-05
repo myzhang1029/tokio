@@ -113,7 +113,7 @@ pub(crate) mod sys {
 pub(crate) mod thread {
     #[inline]
     pub(crate) fn yield_now() {
-        std::hint::spin_loop();
+        core::hint::spin_loop();
     }
 
     #[allow(unused_imports)]

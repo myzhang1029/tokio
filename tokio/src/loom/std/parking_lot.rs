@@ -3,11 +3,11 @@
 //!
 //! This can be extended to additional types/methods as required.
 
-use std::fmt;
-use std::marker::PhantomData;
-use std::ops::{Deref, DerefMut};
+use core::fmt;
+use core::marker::PhantomData;
+use core::ops::{Deref, DerefMut};
+use core::time::Duration;
 use std::sync::{LockResult, TryLockError};
-use std::time::Duration;
 
 // All types in this file are marked with PhantomData to ensure that
 // parking_lot's send_guard feature does not leak through and affect when Tokio
