@@ -5,6 +5,7 @@ use crate::sync::oneshot;
 #[cfg(all(test, unix))]
 use std::os::fd::{AsRawFd, FromRawFd, OwnedFd};
 use std::{
+    boxed::Box,
     cell::RefCell,
     collections::VecDeque,
     fs::{Metadata, Permissions},

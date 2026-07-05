@@ -71,10 +71,15 @@ use crate::task::coop;
 use crate::util::atomic_cell::AtomicCell;
 use crate::util::rand::{FastRand, RngSeedGenerator};
 
+use std::boxed::Box;
 use std::cell::RefCell;
+use std::eprintln;
+use std::string::String;
 use std::task::Waker;
 use std::thread;
 use std::time::{Duration, Instant};
+use std::vec;
+use std::vec::Vec;
 
 mod metrics;
 

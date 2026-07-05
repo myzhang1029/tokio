@@ -1,5 +1,9 @@
 use super::typeid;
 
+use std::borrow::ToOwned;
+use std::string::String;
+use std::vec::Vec;
+
 #[derive(Debug)]
 pub(crate) enum OwnedBuf {
     Vec(Vec<u8>),

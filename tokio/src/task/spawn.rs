@@ -2,6 +2,7 @@ use crate::runtime::BOX_FUTURE_THRESHOLD;
 use crate::task::JoinHandle;
 use crate::util::trace::SpawnMeta;
 
+use std::boxed::Box;
 use std::future::Future;
 
 cfg_rt! {

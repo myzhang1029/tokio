@@ -1,5 +1,6 @@
 use crate::io::ReadBuf;
 use std::mem::MaybeUninit;
+use std::vec::Vec;
 
 /// Something that looks like a `Vec<u8>`.
 ///

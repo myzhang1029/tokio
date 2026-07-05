@@ -6,6 +6,7 @@ mod level;
 pub(crate) use self::level::Expiration;
 use self::level::Level;
 
+use std::boxed::Box;
 use std::ptr::NonNull;
 
 use super::entry::STATE_DEREGISTERED;

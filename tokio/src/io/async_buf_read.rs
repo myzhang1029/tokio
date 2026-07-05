@@ -1,5 +1,6 @@
 use crate::io::AsyncRead;
 
+use std::boxed::Box;
 use std::io;
 use std::ops::DerefMut;
 use std::pin::Pin;

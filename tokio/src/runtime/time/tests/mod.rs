@@ -1,6 +1,8 @@
 #![cfg(not(target_os = "wasi"))]
 
+use std::boxed::Box;
 use std::{task::Context, time::Duration};
+use std::vec;
 
 #[cfg(not(loom))]
 use futures::task::noop_waker_ref;

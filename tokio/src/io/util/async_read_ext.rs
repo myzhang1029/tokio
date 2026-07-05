@@ -14,6 +14,9 @@ use crate::io::util::read_to_string::{read_to_string, ReadToString};
 use crate::io::util::take::{take, Take};
 use crate::io::AsyncRead;
 
+use std::string::String;
+use std::vec::Vec;
+
 use bytes::BufMut;
 
 cfg_io_util! {

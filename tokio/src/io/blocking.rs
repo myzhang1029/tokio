@@ -8,6 +8,7 @@ use std::io::prelude::*;
 use std::mem::MaybeUninit;
 use std::pin::Pin;
 use std::task::{ready, Context, Poll};
+use std::vec::Vec;
 
 /// `T` should not implement _both_ Read and Write.
 #[derive(Debug)]

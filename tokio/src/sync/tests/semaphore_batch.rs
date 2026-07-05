@@ -1,5 +1,6 @@
 use crate::sync::batch_semaphore::Semaphore;
 use tokio_test::*;
+use std::boxed::Box;
 
 const MAX_PERMITS: usize = crate::sync::Semaphore::MAX_PERMITS;
 

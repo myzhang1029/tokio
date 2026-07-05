@@ -115,6 +115,7 @@ mod tests {
     use std::pin::Pin;
     use std::task::Context;
     use std::task::Poll;
+    use std::vec::Vec;
 
     struct TextMockWriter;
 

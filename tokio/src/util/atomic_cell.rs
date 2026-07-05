@@ -1,5 +1,6 @@
 use crate::loom::sync::atomic::AtomicPtr;
 
+use std::boxed::Box;
 use std::ptr;
 use std::sync::atomic::Ordering::AcqRel;
 

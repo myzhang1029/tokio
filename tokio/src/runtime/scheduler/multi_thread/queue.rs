@@ -5,6 +5,7 @@ use crate::loom::sync::Arc;
 use crate::runtime::scheduler::multi_thread::{Overflow, Stats};
 use crate::runtime::task;
 
+use std::boxed::Box;
 use std::mem::{self, MaybeUninit};
 use std::ptr;
 use std::sync::atomic::Ordering::{AcqRel, Acquire, Relaxed, Release};

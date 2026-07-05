@@ -6,6 +6,7 @@ use crate::runtime::{context, Builder, EnterGuard, Handle, BOX_FUTURE_THRESHOLD}
 use crate::task::JoinHandle;
 
 use crate::util::trace::SpawnMeta;
+use std::boxed::Box;
 use std::future::Future;
 use std::marker::PhantomData;
 use std::mem;

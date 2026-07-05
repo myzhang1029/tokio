@@ -7,8 +7,10 @@ use pin_project_lite::pin_project;
 use std::future::Future;
 use std::marker::PhantomPinned;
 use std::pin::Pin;
+use std::string::String;
 use std::task::{ready, Context, Poll};
 use std::{io, mem};
+use std::vec::Vec;
 
 pin_project! {
     /// Future for the [`read_to_string`](super::AsyncReadExt::read_to_string) method.

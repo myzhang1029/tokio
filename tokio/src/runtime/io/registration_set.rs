@@ -6,6 +6,8 @@ use std::io;
 use std::ptr::NonNull;
 use std::sync::atomic::Ordering::{Acquire, Release};
 use std::sync::Arc;
+use std::vec;
+use std::vec::Vec;
 
 // Kind of arbitrary, but buffering 16 `ScheduledIo`s doesn't seem like much
 const NOTIFY_AFTER: usize = 16;

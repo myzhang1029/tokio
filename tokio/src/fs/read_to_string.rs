@@ -1,5 +1,7 @@
 use crate::fs::asyncify;
 
+use std::borrow::ToOwned;
+use std::string::String;
 use std::{io, path::Path};
 
 /// Creates a future which will open a file for reading and read the entire

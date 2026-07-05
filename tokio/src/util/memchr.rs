@@ -2,6 +2,7 @@
 //!
 //! When nothing pulls in libc, then just use a trivial implementation. Note
 //! that we only depend on libc on unix.
+//!
 
 #[cfg(not(all(unix, feature = "libc")))]
 fn memchr_inner(needle: u8, haystack: &[u8]) -> Option<usize> {
@@ -53,6 +54,7 @@ pub(crate) fn memchr(needle: u8, haystack: &[u8]) -> Option<usize> {
 #[cfg(test)]
 mod tests {
     use super::memchr;
+    use std::vec::Vec;
 
     #[test]
     fn memchr_test() {

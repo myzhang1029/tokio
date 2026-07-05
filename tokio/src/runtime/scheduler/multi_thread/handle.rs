@@ -11,6 +11,7 @@ use crate::util::RngSeedGenerator;
 
 use std::fmt;
 use std::num::NonZeroU64;
+use std::string::String;
 
 mod metrics;
 

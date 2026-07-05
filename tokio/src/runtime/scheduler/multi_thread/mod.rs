@@ -47,6 +47,7 @@ use crate::util::RngSeedGenerator;
 
 use std::fmt;
 use std::future::Future;
+use std::string::String;
 
 /// Work-stealing based thread pool for executing futures.
 pub(crate) struct MultiThread;

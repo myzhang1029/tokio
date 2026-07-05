@@ -27,6 +27,7 @@ use crate::runtime::task::state::State;
 use crate::runtime::task::{Id, Schedule, TaskHarnessScheduleHooks};
 use crate::util::linked_list;
 
+use std::boxed::Box;
 use std::num::NonZeroU64;
 #[cfg(tokio_unstable)]
 use std::panic::Location;

@@ -10,6 +10,7 @@ use crate::runtime::{Builder, Callback, Handle, BOX_FUTURE_THRESHOLD};
 use crate::util::metric_atomics::MetricAtomicUsize;
 use crate::util::trace::{blocking_task, SpawnMeta};
 
+use std::boxed::Box;
 use std::collections::{HashMap, VecDeque};
 use std::fmt;
 use std::io;

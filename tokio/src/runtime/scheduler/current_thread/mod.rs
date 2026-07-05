@@ -13,9 +13,11 @@ use crate::sync::notify::Notify;
 use crate::util::atomic_cell::AtomicCell;
 use crate::util::{waker_ref, RngSeedGenerator, Wake, WakerRef};
 
+use std::boxed::Box;
 use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::future::{poll_fn, Future};
+use std::string::String;
 use std::sync::atomic::Ordering::{AcqRel, Acquire, Release};
 use std::task::Poll::{Pending, Ready};
 use std::task::Waker;

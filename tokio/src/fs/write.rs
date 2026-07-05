@@ -1,6 +1,6 @@
 use crate::{fs::asyncify, util::as_ref::OwnedBuf};
 
-use std::{io, path::Path};
+use std::{borrow::ToOwned, io, path::Path};
 
 /// Creates a future that will open a file for writing and write the entire
 /// contents of `contents` to it.

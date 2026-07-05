@@ -4,6 +4,7 @@ use crate::sync::watch;
 use std::ops;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::OnceLock;
+use std::vec::Vec;
 
 pub(crate) type EventId = usize;
 
@@ -168,6 +169,7 @@ mod tests {
     use super::*;
     use crate::runtime::{self, Runtime};
     use crate::sync::{oneshot, watch};
+    use std::vec;
 
     use futures::future;
 

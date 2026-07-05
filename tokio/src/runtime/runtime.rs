@@ -6,6 +6,7 @@ use crate::task::JoinHandle;
 use crate::util::error::RUNTIME_SHUTTING_DOWN_ERROR;
 use crate::util::trace::SpawnMeta;
 
+use std::boxed::Box;
 use std::future::Future;
 use std::io;
 use std::mem;

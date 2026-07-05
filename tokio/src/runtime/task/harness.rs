@@ -7,6 +7,7 @@ use crate::runtime::task::{Id, JoinError, Notified, RawTask, Schedule, Task};
 #[cfg(tokio_unstable)]
 use crate::runtime::TaskMeta;
 use std::any::Any;
+use std::boxed::Box;
 use std::mem;
 use std::mem::ManuallyDrop;
 use std::panic;

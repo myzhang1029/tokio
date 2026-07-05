@@ -10,6 +10,7 @@
 use crate::future::Future;
 use crate::runtime::task::core::{Core, Trailer};
 use crate::runtime::task::{Cell, Harness, Header, Id, Schedule, State};
+use std::boxed::Box;
 #[cfg(tokio_unstable)]
 use std::panic::Location;
 use std::ptr::NonNull;
