@@ -27,7 +27,7 @@ cfg_macros! {
     }
 }
 
-pub use std::future::{Future, IntoFuture};
-pub use std::pin::Pin;
-pub use std::result::Result;
-pub use std::task::{ready, Context, Poll};
+pub use core::future::{Future, IntoFuture};
+pub use core::pin::Pin;
+pub use core::result::Result;
+pub use core::task::{ready, Context, Poll};

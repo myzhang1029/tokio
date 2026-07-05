@@ -458,6 +458,16 @@ macro_rules! cfg_not_signal_internal {
     }
 }
 
+macro_rules! cfg_std {
+    ($($item:item)*) => {
+        $(
+            #[cfg(feature = "std")]
+            #[cfg_attr(docsrs, doc(cfg(feature = "std")))]
+            $item
+        )*
+    }
+}
+
 macro_rules! cfg_sync {
     ($($item:item)*) => {
         $(

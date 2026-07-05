@@ -11,6 +11,7 @@ macro_rules! tokio_thread_local {
 }
 
 #[cfg(not(all(loom, test)))]
+#[cfg(feature = "std")]
 macro_rules! tokio_thread_local {
     ($($tts:tt)+) => {
         ::std::thread_local!{ $($tts)+ }
