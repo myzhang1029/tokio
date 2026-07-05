@@ -28,12 +28,14 @@
 //! [`tokio::net::windows::named_pipe`]: windows::named_pipe
 //! [`AsyncFd`]: crate::io::unix::AsyncFd
 
-mod addr;
-cfg_not_wasip1! {
-    #[cfg(feature = "net")]
-    pub(crate) use addr::to_socket_addrs;
+cfg_std! {
+    mod addr;
+    cfg_not_wasip1! {
+        #[cfg(feature = "net")]
+        pub(crate) use addr::to_socket_addrs;
+    }
+    pub use addr::ToSocketAddrs;
 }
-pub use addr::ToSocketAddrs;
 
 cfg_net! {
     mod lookup_host;
