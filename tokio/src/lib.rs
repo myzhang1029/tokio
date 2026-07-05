@@ -594,14 +594,14 @@ mod trace {
     cfg_not_taskdump! {
         #[inline(always)]
         #[allow(dead_code)]
-        pub(crate) fn trace_leaf() -> std::task::Poll<()> {
-            std::task::Poll::Ready(())
+        pub(crate) fn trace_leaf() -> core::task::Poll<()> {
+            core::task::Poll::Ready(())
         }
     }
 
     #[cfg_attr(not(feature = "sync"), allow(dead_code))]
     pub(crate) async fn async_trace_leaf() {
-        std::future::poll_fn(|_cx| trace_leaf()).await
+        core::future::poll_fn(|_cx| trace_leaf()).await
     }
 }
 
