@@ -278,7 +278,7 @@
 //! use tokio::io::{AsyncReadExt, AsyncWriteExt};
 //!
 //! #[tokio::main]
-//! async fn main() -> Result<(), Box<dyn std::error::Error>> {
+//! async fn main() -> Result<(), Box<dyn core::error::Error>> {
 //!     let listener = TcpListener::bind("127.0.0.1:8080").await?;
 //!
 //!     loop {
@@ -657,6 +657,7 @@ pub mod doc;
 #[allow(unused)]
 pub(crate) use self::doc::os;
 
+#[cfg(feature = "std")]
 #[cfg(not(all(docsrs, unix)))]
 #[allow(unused)]
 pub(crate) use std::os;
